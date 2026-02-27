@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/dashboard.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <h1>Demand Capture Dashboard</h1>
+        <p>SEO / AEO / GEO signal intelligence with action recommendations.</p>
+        <div class="auth-actions">
+          <a class="button-link" href="/">Account & Connections</a>
+          <button id="run-agent-btn">Run Agent Snapshot</button>
+        </div>
+      </header>
+
+      <section class="kpi-grid">
+        <article class="card kpi">
+          <h3>AI Citation Share</h3>
+          <p id="kpi-citation">-</p>
+        </article>
+        <article class="card kpi">
+          <h3>Non-Branded Pipeline</h3>
+          <p id="kpi-pipeline">-</p>
+        </article>
+        <article class="card kpi">
+          <h3>Content Velocity Gap</h3>
+          <p id="kpi-velocity">-</p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Rising Queries</h2>
+        <div id="rising-queries"></div>
+      </section>
+
+      <section class="card">
+        <h2>Decaying Pages</h2>
+        <div id="decaying-pages"></div>
+      </section>
+
+      <section class="card">
+        <h2>Snippet Recommendations</h2>
+        <div id="snippet-recs"></div>
+      </section>
+
+      <section class="card">
+        <h2>Content Briefs</h2>
+        <div id="content-briefs"></div>
+      </section>
+
+      <section class="card">
+        <h2>Brand Mentioned but Not Cited</h2>
+        <div id="uncited-mentions"></div>
+      </section>
+
+      <p id="status" class="status"></p>
+    </main>
+    <script src="/static/dashboard.js"></script>
+  </body>
+</html>

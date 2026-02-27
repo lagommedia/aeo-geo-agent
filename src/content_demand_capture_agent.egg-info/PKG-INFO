@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: content-demand-capture-agent
+Version: 0.1.0
+Summary: Agent pipeline for SEO/AEO/GEO demand capture
+Requires-Python: >=3.10
+Requires-Dist: fastapi>=0.116.0
+Requires-Dist: uvicorn>=0.35.0
+Requires-Dist: sqlmodel>=0.0.24
+Requires-Dist: authlib>=1.6.0
+Requires-Dist: jinja2>=3.1.0
+Requires-Dist: httpx>=0.28.0
+Requires-Dist: itsdangerous>=2.2.0
+Requires-Dist: email-validator>=2.2.0

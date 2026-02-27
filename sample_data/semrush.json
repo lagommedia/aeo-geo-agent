@@ -1,0 +1,16 @@
+{
+  "queries": [
+    {
+      "query": "finance automation for startups",
+      "intent": "commercial",
+      "competitor_gap": 0.7,
+      "urls": ["https://competitor-a.com/finance-automation"]
+    },
+    {
+      "query": "startup bookkeeping software",
+      "intent": "transactional",
+      "competitor_gap": 0.8,
+      "urls": ["https://competitor-b.com/startup-bookkeeping"]
+    }
+  ]
+}

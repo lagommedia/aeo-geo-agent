@@ -1,0 +1,25 @@
+[project]
+name = "content-demand-capture-agent"
+version = "0.1.0"
+description = "Agent pipeline for SEO/AEO/GEO demand capture"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.116.0",
+    "uvicorn>=0.35.0",
+    "sqlmodel>=0.0.24",
+    "authlib>=1.6.0",
+    "jinja2>=3.1.0",
+    "httpx>=0.28.0",
+    "itsdangerous>=2.2.0",
+    "email-validator>=2.2.0",
+]
+
+[project.scripts]
+content-demand-agent = "content_demand_agent.app:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

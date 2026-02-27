@@ -1,0 +1,16 @@
+{
+  "queries": [
+    {
+      "query": "bookkeeping services for startups",
+      "intent": "commercial",
+      "competitor_gap": 0.6,
+      "urls": ["https://competitor-c.com/bookkeeping-services"]
+    },
+    {
+      "query": "finance stack for seed startups",
+      "intent": "informational",
+      "competitor_gap": 0.5,
+      "urls": ["https://competitor-d.com/finance-stack"]
+    }
+  ]
+}

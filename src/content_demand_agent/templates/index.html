@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Demand Capture Agent</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <h1>Content Demand Capture Agent</h1>
+        <p>Unified login and platform connection for SEO / AEO / GEO demand capture.</p>
+        <div class="auth-actions">
+          <a class="button-link" href="/dashboard">Open Dashboard</a>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>User Auth</h2>
+        <div class="form-grid">
+          <form id="register-form">
+            <h3>Register</h3>
+            <label>Email <input type="email" name="email" required /></label>
+            <label>Password <input type="password" name="password" minlength="8" required /></label>
+            <button type="submit">Create Account</button>
+          </form>
+
+          <form id="login-form">
+            <h3>Login</h3>
+            <label>Email <input type="email" name="email" required /></label>
+            <label>Password <input type="password" name="password" required /></label>
+            <button type="submit">Log In</button>
+          </form>
+        </div>
+        <div class="auth-actions">
+          <button id="logout-btn" class="secondary">Log Out</button>
+          {% if google_configured %}
+          <a class="button-link" href="/auth/google/login">Link / Verify with Google</a>
+          {% else %}
+          <p class="warning">
+            Google OAuth is not configured. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET.
+          </p>
+          {% endif %}
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Connect Platforms</h2>
+        <form id="platform-form">
+          <label>
+            Platform
+            <select name="platform" id="platform" required></select>
+          </label>
+
+          <label>
+            Login Method
+            <select name="login_method" id="login_method" required>
+              <option value="credentials">Credentials</option>
+              <option value="google_oauth">Google OAuth</option>
+            </select>
+          </label>
+
+          <div id="credentials-group">
+            <label>Username <input type="text" name="username" /></label>
+            <label>Password <input type="password" name="password" /></label>
+          </div>
+
+          <button type="submit">Connect Platform</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Account State</h2>
+        <button id="refresh-btn" class="secondary">Refresh</button>
+        <pre id="state-view">Loading...</pre>
+      </section>
+
+      <p id="status" class="status" aria-live="polite"></p>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

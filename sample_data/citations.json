@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "date": "2026-02-20",
+      "prompt": "best finance automation tools for startups",
+      "brand_mentioned": true,
+      "brand_cited": false,
+      "cited_urls": ["https://competitor-a.com/tool", "https://competitor-b.com/tool"],
+      "competitor_cited": ["competitor-a.com", "competitor-b.com"]
+    },
+    {
+      "date": "2026-02-21",
+      "prompt": "how founders should set up startup bookkeeping",
+      "brand_mentioned": true,
+      "brand_cited": true,
+      "cited_urls": ["https://zeni.ai/resources/bookkeeping", "https://competitor-c.com/guide"],
+      "competitor_cited": ["competitor-c.com"]
+    }
+  ]
+}

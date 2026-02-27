@@ -1,0 +1,117 @@
+:root {
+  --bg: #f7f8f3;
+  --panel: #ffffff;
+  --ink: #1d2b24;
+  --muted: #4f6358;
+  --accent: #156b52;
+  --accent-2: #dcedc5;
+  --border: #d7e0d1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Avenir Next", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, #f2f8e7, var(--bg) 45%);
+}
+
+.shell {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+}
+
+.hero p {
+  margin-top: 0.35rem;
+  color: var(--muted);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.94rem;
+}
+
+input,
+select,
+button {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.7rem;
+  font: inherit;
+}
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  cursor: pointer;
+}
+
+button.secondary,
+.button-link {
+  background: var(--accent-2);
+  color: var(--ink);
+  border-color: #cfe2ad;
+}
+
+.button-link {
+  text-decoration: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.auth-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+#state-view {
+  margin-top: 0.7rem;
+  padding: 0.8rem;
+  background: #18221f;
+  color: #d8ffe4;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.warning,
+.status {
+  color: var(--muted);
+  margin-top: 0.8rem;
+}

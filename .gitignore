@@ -1,0 +1,17 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node / Next
+node_modules/
+.next/
+
+# macOS
+.DS_Store
+
+# Celery
+celerybeat-schedule

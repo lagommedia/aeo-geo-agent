@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import auth, metrics, opportunities, runs, sources
-from app.core.database import engine
+from app.api.routes import agents, auth, metrics, opportunities, runs, sources
+from app.core.config import settings
+from app.core.database import SessionLocal, engine
 from app.core.logging import configure_logging
+from app.core.security import hash_password
 from app.models import Base
-from app.services.ingestion import run_ingestion
-from app.core.database import SessionLocal
+from app.models.user import User
 
 configure_logging()
 app = FastAPI(title="AI Content Demand Capture Agent API")
@@ -20,6 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(agents.router)
 app.include_router(opportunities.router)
 app.include_router(runs.router)
 app.include_router(sources.router)
@@ -30,17 +32,17 @@ app.include_router(metrics.router)
 def startup_event() -> None:
     Base.metadata.create_all(bind=engine)
 
+    # Keep auth bootstrap only. Do not auto-run strategist ingestion.
+    db = SessionLocal()
+    try:
+        demo_user = db.query(User).filter(User.email == settings.demo_email).one_or_none()
+        if not demo_user:
+            db.add(User(email=settings.demo_email, password_hash=hash_password(settings.demo_password)))
+            db.commit()
+    finally:
+        db.close()
+
 
 @app.get("/health")
 def health():
     return {"status": "ok"}
-
-
-@app.post("/admin/run-ingestion")
-def admin_run_ingestion():
-    db = SessionLocal()
-    try:
-        result = run_ingestion(db)
-        return {"status": "ok", "result": result}
-    finally:
-        db.close()

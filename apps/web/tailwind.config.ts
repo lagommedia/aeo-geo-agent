@@ -5,11 +5,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: '#f3f2ed',
-        panel: '#fffdf8',
-        accent: '#c3472c',
-        ink: '#1b1b1b',
-        muted: '#5f5c56'
+        canvas: '#0f1218',
+        panel: '#171b24',
+        accent: '#de6a45',
+        ink: '#f2f4f8',
+        muted: '#9ba3b5'
       }
     }
   },

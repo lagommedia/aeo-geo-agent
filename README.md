@@ -36,6 +36,9 @@ Demo credentials:
 - email: `demo@zeni.ai`
 - password: `demo1234`
 
+Note:
+- API startup auto-seeds demo user and sample opportunities when DB is empty (`AUTO_SEED_ON_STARTUP=true`).
+
 ## API Credentials
 
 Set optional real credentials in `.env`:
@@ -44,8 +47,35 @@ Set optional real credentials in `.env`:
 - `SEMRUSH_API_KEY`
 - `AHREFS_API_KEY`
 - `OPENAI_API_KEY`
+- `OPENAI_MODEL` (default `gpt-4.1-mini`)
+- `GOOGLE_OAUTH_CLIENT_ID`
+- `GOOGLE_OAUTH_CLIENT_SECRET`
+- `GOOGLE_OAUTH_REDIRECT_URI` (default `http://localhost:3000/oauth/google/callback`)
+- `SOURCE_ENCRYPTION_KEY` (used to encrypt stored source secrets)
 
 MVP defaults to sample file adapters when keys are absent.
+
+## Source Integrations (Settings page)
+
+- Google Search Console:
+  - Uses OAuth 2.0 (`Connect Google Account` in Settings).
+  - Callback URL must match `GOOGLE_OAUTH_REDIRECT_URI` exactly.
+  - `Test connection` calls Search Console Sites API.
+- SEMrush:
+  - API key flow (provider does not expose standard user OAuth flow for this MVP path).
+- Ahrefs:
+  - API key flow (provider does not expose standard user OAuth flow for this MVP path).
+- AI Citations:
+  - Configurable provider + optional API key + tracked prompts/competitors/brand terms.
+  - Mock mode works without keys.
+
+
+## Brief -> Article Generation
+
+- Open any brief at `/briefs/{id}` and click `Generate content`.
+- If `OPENAI_API_KEY` is set, the API generates publication-ready markdown via OpenAI.
+- If no key is set, the app uses a deterministic local template fallback so the flow still works offline.
+- Generated article output is persisted on the opportunity and shown to end users in the Brief page.
 
 ## Scheduler Jobs
 
@@ -71,6 +101,8 @@ Celery beat schedules:
 - `GET /opportunities`
 - `PATCH /opportunities/{id}`
 - `GET /opportunities/{id}/brief`
+- `GET /opportunities/{id}/content`
+- `POST /opportunities/{id}/content/generate`
 - `GET /runs`
 - `GET /metrics`
 - `GET/POST /sources`

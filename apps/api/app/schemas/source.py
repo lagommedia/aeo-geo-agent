@@ -10,6 +10,30 @@ class SourceConfigIn(BaseModel):
     notes: str | None = None
 
 
+class SourceCredentialIn(BaseModel):
+    source_name: str
+    credentials: dict
+    notes: str | None = None
+
+
+class OAuthStartResponse(BaseModel):
+    source_name: str
+    auth_url: str
+    state: str
+
+
+class OAuthCallbackIn(BaseModel):
+    code: str
+    state: str
+
+
+class SourceTestResponse(BaseModel):
+    source_name: str
+    status: str
+    message: str
+    details: dict = {}
+
+
 class SourceConfigOut(BaseModel):
     id: int
     source_name: str

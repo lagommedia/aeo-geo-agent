@@ -1,3 +1,7 @@
+from sqlalchemy.orm import Session
+
+from app.services.aeo_geo_agents import run_agent
+
 from textwrap import dedent
 
 
@@ -88,3 +92,41 @@ def generate_brief(
         - Demo request conversion rate from this page
         """
     ).strip()
+
+
+def generate_strategist_brief(db: Session, opportunity) -> str:
+    metadata = opportunity.metadata_json or {}
+    prompt = (
+        "Create a world-class, execution-ready content brief for the provided opportunity. "
+        "Return markdown only. Make it specific, tactical, and decision-useful. "
+        "Focus on keyword/topic implementation, cannibalization avoidance, and measurable outcomes."
+    )
+    context = {
+        "query_text": opportunity.query_text,
+        "source": opportunity.source,
+        "intent": opportunity.intent,
+        "funnel_stage": opportunity.funnel_stage,
+        "priority_score": opportunity.priority_score,
+        "priority_explanation": opportunity.priority_explanation,
+        "score_components": (metadata.get("score_components") if isinstance(metadata, dict) else None),
+        "classification_reason": (metadata.get("classification_reason") if isinstance(metadata, dict) else None),
+        "existing_brief": opportunity.brief,
+        "links": opportunity.links or [],
+    }
+
+    try:
+        result = run_agent(db, "strategist", prompt, context=context)
+        output = (result.get("output") or "").strip()
+        if output:
+            return output
+    except Exception:
+        pass
+
+    # Fallback to baseline brief generator
+    return generate_brief(
+        opportunity.query_text,
+        opportunity.intent or "informational",
+        opportunity.funnel_stage or "TOFU",
+        [],
+        opportunity.links or [],
+    )

@@ -1,20 +1,11 @@
-from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
-import sys
 
-ROOT = Path(__file__).resolve().parent
-PACKAGE_ROOT = ROOT / "app"
-MAIN_PATH = PACKAGE_ROOT / "main.py"
+PACKAGE_ROOT = Path(__file__).resolve().parent / "app"
 
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-if str(PACKAGE_ROOT) not in sys.path:
-    sys.path.insert(0, str(PACKAGE_ROOT))
+# Vercel imports this file as module name "app". Expose it as a package too,
+# so imports like "app.api.routes" resolve against the real app/ directory.
+__path__ = [str(PACKAGE_ROOT)]
 
-spec = spec_from_file_location("aeo_api_main", MAIN_PATH)
-if spec is None or spec.loader is None:
-    raise RuntimeError(f"Could not load FastAPI app from {MAIN_PATH}")
+from app.main import app as fastapi_app
 
-module = module_from_spec(spec)
-spec.loader.exec_module(module)
-app = module.app
+app = fastapi_app
